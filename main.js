@@ -1,86 +1,110 @@
-var firstClassPlus = document.querySelector('.first-class-plus')
-var firstClassMinus = document.querySelector('.first-class-minus')
-var economyClassPlus = document.querySelector('.economy-class-plus')
-var economyClassMinus = document.querySelector('.economy-class-minus')
-var firstClassInputBox = document.querySelector(".first-class-input-box")
-var economyClassInputBox = document.querySelector(".economy-class-input-box")
-var subtotal = document.querySelector(".subtotal")
-var vat = document.querySelector(".vat")
-var total = document.querySelector(".total")
-var bookBtn = document.getElementById("book-btn")
+let inputField = document.getElementById("inputField")
+let searchBtn = document.getElementById("search-btn")
+let mealBox = document.getElementById("meal-box")
+let mealDetails = document.getElementById("meal-details")
+let modalBody = document.getElementById("modal-body")
+let searchValue = ""
+let searchedData
 
-var showBook = document.querySelector(".show-book")
-var showBookFirstClassTicket = document.querySelector(".show-book-first-class-ticket")
-var showBookEconomyClassTicket = document.querySelector(".show-book-economy-class-ticket")
-var showBookFirstClassPrice = document.querySelector(".show-book-first-class-price")
-var showBookEconomyClassPrice = document.querySelector(".show-book-economy-class-price")
-var showBookTotal = document.querySelector(".show-book-total")
-
-var firstClassTicketCounter = 0;
-var economyClassTicketCounter = 0;
-
-firstClassPlus.addEventListener("click", function () {
-    firstClassInputBox.value = ++firstClassTicketCounter
-    setSubtotalVatTotal()
-    setShowBook()
-})
-firstClassMinus.addEventListener("click", function () {
-    if (firstClassTicketCounter > 0) {
-        firstClassInputBox.value = --firstClassTicketCounter
-        setSubtotalVatTotal()
-        setShowBook()
-    }
-    else {
-        alert("ticket amount can not be negative")
-    }
-})
-economyClassPlus.addEventListener("click", function () {
-    economyClassInputBox.value = ++economyClassTicketCounter
-    setSubtotalVatTotal()
-    setShowBook()
-})
-economyClassMinus.addEventListener("click", function () {
-    if (economyClassTicketCounter > 0) {
-        economyClassInputBox.value = --economyClassTicketCounter
-        setSubtotalVatTotal()
-        setShowBook()
-    }
-    else {
-        alert("ticket amount can not be negative")
-    }
-})
-function setSubtotalVatTotal() {
-    subtotal.innerHTML = firstClassTicketCounter * 150 + economyClassTicketCounter * 100
-    vat.innerHTML = (firstClassTicketCounter * 150 + economyClassTicketCounter * 100) * 0.1
-    total.innerHTML = (firstClassTicketCounter * 150 + economyClassTicketCounter * 100) + ((firstClassTicketCounter * 150 + economyClassTicketCounter * 100) * 0.1)
-}
-bookBtn.addEventListener("click", function () {
-    setShowBook()
-    showBook.style.display = 'block';
-})
-function setShowBook() {
-    showBookFirstClassTicket.innerHTML = firstClassTicketCounter
-    showBookEconomyClassTicket.innerHTML = economyClassTicketCounter
-    showBookFirstClassPrice.innerHTML = firstClassTicketCounter * 150
-    showBookEconomyClassPrice.innerHTML = economyClassTicketCounter * 100
-    showBookTotal.innerHTML = (firstClassTicketCounter * 150 + economyClassTicketCounter * 100) + ((firstClassTicketCounter * 150 + economyClassTicketCounter * 100) * 0.1)
+attachOnClick = () => {
+    let mealItem = document.querySelectorAll(".meal-item")
+    mealItem.forEach(item => {
+        item.addEventListener('click', (e) => {
+            let clickedItem = e.target.title
+            let clickedItemDetails = searchedData.meals.filter(meal => meal.strMeal == clickedItem)[0]
+            mealDetails.innerHTML = ''
+            modalBody.innerHTML = ''
+            const img = clickedItemDetails.strMealThumb
+            const name = clickedItemDetails.strMeal
+            var image = document.createElement('img');
+            image.src = img
+            image.alt = name
+            image.style.width = "200px"
+            image.style.height = "200px"
+            image.style.display = "block"
+            image.setAttribute("class", "mx-auto my-3")
+            var para = document.createElement("h3");
+            var node = document.createTextNode(`${name} - Ingredient`);
+            para.setAttribute('class', 'text-center mt-2')
+            para.appendChild(node);
+            modalBody.appendChild(image)
+            modalBody.appendChild(para)
+            for (let i = 1; i <= 20; i++) {
+                const ingredient = clickedItemDetails[`strIngredient${i}`]
+                if (Boolean(ingredient)) {
+                    var para = document.createElement("p");
+                    var node = document.createTextNode(`${i} - ${ingredient}`);
+                    para.setAttribute('class', 'mt-1 text-center')
+                    para.appendChild(node);
+                    // modalBody.appendChild(para)
+                    modalBody.appendChild(para)
+                }
+            }
+        })
+    })
 }
 
-firstClassInputBox.addEventListener("change", function (e) {
-    if (e.target.value > 0) {
-        firstClassTicketCounter = e.target.value
-        setSubtotalVatTotal()
-        setShowBook()
-    } else {
-        alert("ticket amount can not be negative")
-    }
+inputField.addEventListener('change', (e) => {
+    searchValue = e.target.value
 })
-economyClassInputBox.addEventListener("change", function (e) {
-    if (e.target.value > 0) {
-        economyClassTicketCounter = e.target.value
-        setSubtotalVatTotal()
-        setShowBook()
+
+
+returnMeal = (mealsObj) => {
+    if (mealsObj.meals != null) {
+        mealBox.innerHTML = ''
+        mealsObj.meals.map((meal, index) => {
+            const img = meal.strMealThumb
+            const name = meal.strMeal
+            var div = document.createElement("div");
+            div.setAttribute("class", 'meal-item m-4');
+            div.setAttribute("data-toggle", 'modal');
+            div.setAttribute("data-target", '#exampleModal');
+            div.style.width = "200px";
+            div.style.cursor = "pointer";
+            var image = document.createElement('img');
+            image.src = img
+            image.title = name
+            image.alt = name
+            image.setAttribute("class", "img-fluid")
+            var para = document.createElement("p");
+            var node = document.createTextNode(name);
+            para.setAttribute('class', 'text-center mt-2')
+            para.setAttribute('title', name)
+            para.appendChild(node);
+            div.appendChild(image)
+            div.appendChild(para)
+            mealBox.appendChild(div)
+
+        })
     } else {
-        alert("ticket amount can not be negative")
+        mealBox.innerHTML = ''
+        var para = document.createElement("p");
+        var node = document.createTextNode('Sorry! No item found. Try again with another name...');
+        para.setAttribute('class', 'mt-5 text-danger')
+        para.appendChild(node);
+        mealBox.appendChild(para)
     }
+    attachOnClick()
+}
+
+searchBtn.addEventListener("click", () => {
+    if (searchValue == '') {
+        alert("Meal name can not be empty")
+        return
+    }
+    if (searchedData == undefined) {
+        mealBox.innerHTML = ''
+        var para = document.createElement("p");
+        var node = document.createTextNode('please wait...');
+        para.setAttribute('class', 'mt-5 text-success')
+        para.appendChild(node);
+        mealBox.appendChild(para)
+    }
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`)
+        .then(response => response.json())
+        .then(data => searchedData = data)
+        .then(() => {
+            returnMeal(searchedData)
+        })
 })
+

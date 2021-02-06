@@ -1,117 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Booking</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet">
-    <!-- Stylesheet -->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <title>Mealdb</title>
 </head>
 
 <body>
-    <!--Header and Menu Section-->
-    <header class="container">
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a class="active" href="#">Sign Up</a></li>
-            </ul>
+    <header style="margin-bottom: 100px;">
+        <nav class="navbar navbar-default fixed-top navbar-expand-lg navbar-dark bg-info">
+            <div class="container">
+                <a class="navbar-brand" href="/">Rokib Ahmed</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
+    <div class="d-flex mt-5 justify-content-center flex-wrap">
+        <input class="form-control w-50 mt-2" id="inputField" type="text" value="" placeholder="enter meal name">
+        <button id="search-btn" class="btn btn-outline-success ml-3 mt-2">search</button>
+    </div>
+    <div id="meal-box" class="justify-content-center d-flex flex-wrap w-75 mx-auto">
+        <!-- <span title="x" class="meal-item">xxx</span>
+        <span title="z" class="meal-item">zzzzzzz</span> -->
+    </div>
+    <div id="meal-details" class="d-flex flex-column flex-wrap w-75 mx-auto">
+        <!-- <span title="x" class="meal-item">xxx</span>
+        <span title="z" class="meal-item">zzzzzzz</span> -->
+    </div>
 
-    <!--Booking Section-->
-    <main class="main-content container">
-        <div class="booking-form">
-            <h3>Booking Flights</h3>
-            <div class="input-group">
-                <label for="">Flying From</label>
-                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
-            </div>
-            <div class="input-group">
-                <label for="">Flying To</label>
-                <input class="inp-style" type="text" name="" placeholder="New York, United States">
-            </div>
-            <div class="inputs">
-                <div class="input-group">
-                    <label" for="">Departure</label>
-                    <input class="inp-style" type="date" name="">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel">Item Ingredient</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="input-group">
-                    <label for="">Return</label>
-                    <input class="inp-style" type="date" name="">
-                </div>
-            </div>
-            <div class="input-group f-class">
-                <div>
-                    <label for="">First Class ($150)</label>
-                    <input class="inp-style inp-width first-class-input-box" type="number" name="" value="0" />
-                </div>
-                <div class="plus-minus-btn">
-                    <p class="first-class-plus">+</p>
-                    <p class="first-class-minus">-</p>
-                </div>
-            </div>
-            
-            <div class="input-group f-class">
-                <div>
-                    <label for="">Economy ($100)</label>
-                    <input class="inp-style inp-width economy-class-input-box" type="number" name="" value="0" />
-                </div>
-                <div class="plus-minus-btn">
-                    <p class="economy-class-plus">+</p>
-                    <p class="economy-class-minus">-</p>
-                </div>
-            </div>
-            <div class="calculations">
-                <div class="amount">
-                    <div class="left">
-                        <p>Subtotal</p>
-                    </div>
-                    <div class="right">
-                        <p>$ <span class="subtotal">0</span></p>
-                    </div>
-                </div>
+                <div id="modal-body" class="w-100">
 
-                <div class="amount">
-                    <div class="left">
-                        <p>Charge 10% VAT</p>
-                    </div>
-                    <div class="right">
-                        <p>$ <span class="vat">0</span></p>
-                    </div>
                 </div>
-                <hr>
-                <div class="amount">
-                    <div class="left">
-                        <h4>Total</h4>
-                    </div>
-                    <div class="right">
-                        <p>$ <span class="total">0</span></p>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
-            </div>
-            <button class="btn-style" id="book-btn">Book Now</button>
-        </div>
-
-        <div class="booking-content">
-            <h1>discover <br> around the world</h1>
-            <div class="show-book">
-                <p>You have booked <span class="show-book-first-class-ticket"></span> first class ticket = $ <span class="show-book-first-class-price"></span></p>
-                <p>You have booked <span class="show-book-economy-class-ticket"></span> economy class ticket = $ <span class="show-book-economy-class-price"></span></p>
-                <p>Total price with 10% vat = $ <span class="show-book-total"></span></p>
             </div>
         </div>
-    </section>
-
-    <!--Thank You-->
+    </div>
+    <!-- Optional JavaScript -->
     <script src="main.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
