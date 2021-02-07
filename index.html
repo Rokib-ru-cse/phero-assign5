@@ -9,13 +9,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Mealdb</title>
 </head>
 
-<body>
+<body style="background: #cecece;">
     <header style="margin-bottom: 100px;">
-        <nav class="navbar navbar-default fixed-top navbar-expand-lg navbar-dark bg-info">
+        <nav class="navbar navbar-default fixed-top navbar-expand-lg navbar-dark bg-info" style="box-shadow: 0px 10px 20px 1px rgba(255,0,0,.9);">
             <div class="container">
                 <a class="navbar-brand" href="/phero-assign5">Rokib Ahmed</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -33,17 +34,12 @@
             </div>
         </nav>
     </header>
-    <div class="d-flex mt-5 justify-content-center flex-wrap">
-        <input class="form-control w-50 mt-2" id="inputField" type="text" value="" placeholder="enter meal name">
+    <div class="d-flex mt-5 justify-content-center flex-wrap ">
+        <input class="form-control w-50 mt-2 shadow p-3 bg-white rounded" id="inputField" type="text" value="" placeholder="enter meal name">
         <button id="search-btn" class="btn btn-outline-success ml-3 mt-2">search</button>
     </div>
     <div id="meal-box" class="justify-content-center d-flex flex-wrap w-75 mx-auto">
-        <!-- <span title="x" class="meal-item">xxx</span>
-        <span title="z" class="meal-item">zzzzzzz</span> -->
-    </div>
-    <div id="meal-details" class="d-flex flex-column flex-wrap w-75 mx-auto">
-        <!-- <span title="x" class="meal-item">xxx</span>
-        <span title="z" class="meal-item">zzzzzzz</span> -->
+    
     </div>
 
     <!-- Modal -->
@@ -61,7 +57,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
