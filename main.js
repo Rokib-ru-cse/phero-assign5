@@ -49,12 +49,8 @@ attachOnClick = () => {
 }
 
 inputField.addEventListener('change', (e) => {
-    searchValue = e.target.value
+    searchValue = e.target.value.trim()
 })
-inputField.addEventListener('keypress', (e) => {
-    searchedData = undefined
-})
-
 
 returnMeal = (mealsObj) => {
     if (mealsObj.meals != null) {
@@ -100,6 +96,7 @@ returnMeal = (mealsObj) => {
 }
 
 searchBtn.addEventListener("click", () => {
+    searchedData = undefined
     if (searchValue == '') {
         alert("Meal name can not be empty")
         return
