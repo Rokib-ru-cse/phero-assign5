@@ -63,22 +63,24 @@ returnMeal = (mealsObj) => {
             const img = meal.strMealThumb
             const name = meal.strMeal
             var div = document.createElement("div");
-            div.setAttribute("class", 'meal-item m-4');
+            div.setAttribute("class", 'meal-item m-4 text-center');
             div.setAttribute("data-toggle", 'modal');
             div.setAttribute("data-target", '#exampleModal');
             div.setAttribute("title", name);
             div.style.width = "200px";
             div.style.cursor = "pointer";
-            div.style.boxShadow = "0px 0px 10px 2px rgba(255,0,0,.7)";
-            div.style.borderRadius = "15px"
+            div.style.boxShadow = "0 0 10px 10px rgba(158,202,237,1)"
+            div.style.borderRadius = "20px"
             var image = document.createElement('img');
             image.src = img
             image.title = name
             image.alt = name
-            image.setAttribute("class", "img-fluid shadow p-3 mb-5 bg-white rounded")
+            image.style.boxShadow = "0 0 5px 5px rgba(255,0,0,.4)"
+            image.style.borderRadius = "20px"
+            image.setAttribute("class", "w-75 mt-3")
             var para = document.createElement("p");
             var node = document.createTextNode(name);
-            para.setAttribute('class', 'text-center mt-2')
+            para.setAttribute('class', 'text-center mt-4')
             para.setAttribute('title', name)
             para.appendChild(node);
             div.appendChild(image)
